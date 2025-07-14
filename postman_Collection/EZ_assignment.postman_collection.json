@@ -1,0 +1,210 @@
+{
+	"info": {
+		"_postman_id": "bd9fa934-5aa1-48ee-b86b-b27654519026",
+		"name": "EZ_assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28948260",
+		"_collection_link": "https://speeding-space-727205.postman.co/workspace/My-Workspace~1ace3d7e-1af0-48d6-8c2f-850cb949881f/collection/28948260-bd9fa934-5aa1-48ee-b86b-b27654519026?action=share&source=collection_link&creator=28948260"
+	},
+	"item": [
+		{
+			"name": "client_signUP",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"client1@example.com\",\r\n  \"password\": \"clientpass\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/client/signup",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"client",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "client_login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"client1@example.com\",\r\n  \"password\": \"clientpass\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/client/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"client",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin_create_opsUSer",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "supersecrettoken",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"ops1@example.com\",\r\n  \"password\": \"opssecurepass\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/admin/create-ops",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"admin",
+						"create-ops"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OPs_login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"ops1@example.com\",\r\n  \"password\": \"opssecurepass\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/ops/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"ops",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ops_upload_file",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjExLCJleHAiOjE3NTI0Mjk0OTB9.Iv6WoSY9Lx7dIDAz9ECNwIH7Yghz342KcOTkJtdPbSM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjExLCJleHAiOjE3NTI0Mjk0OTB9.Iv6WoSY9Lx7dIDAz9ECNwIH7Yghz342KcOTkJtdPbSM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "postman-cloud:///1f0600d0-9bd2-4f00-bcf8-a7711d629a62"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/ops/upload",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"ops",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "client_files",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

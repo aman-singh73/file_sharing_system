@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.env
+*.sqlite3
+*.db
+*.log
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+.idea/
+.mypy_cache/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# VS Code
+.vscode/
+
+# PyInstaller
+*.spec
+
+# macOS / Linux
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# FastAPI Uploads or Temp Files
+uploads/
+*.bak
+
+# Environment
+.env
+.env.*
+
+# Node/Frontend (if using React/Vite in same repo)
+node_modules/
+build/
+dist/
+
+# Coverage
+htmlcov/
+.coverage

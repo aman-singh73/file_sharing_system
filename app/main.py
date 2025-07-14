@@ -4,6 +4,7 @@ from .routers import ops_user, client_user
 from app.routers import client_user, ops_user, admin
 from dotenv import load_dotenv
 from fastapi.responses import HTMLResponse
+from fastapi.openapi.utils import get_openapi
 
 load_dotenv() 
 Base.metadata.create_all(bind=engine)
@@ -72,3 +73,30 @@ def home():
 app.include_router(ops_user.router)
 app.include_router(client_user.router)
 app.include_router(admin.router)
+
+
+def custom_openapi():
+    if app.openapi_schema:
+        return app.openapi_schema
+
+    openapi_schema = get_openapi(
+        title="Secure File Sharing API",
+        version="1.0.0",
+        description="A FastAPI-powered backend for secure file upload, download, and role-based access.",
+        routes=app.routes,
+    )
+    openapi_schema["components"]["securitySchemes"] = {
+        "BearerAuth": {
+            "type": "http",
+            "scheme": "bearer",
+            "bearerFormat": "JWT"
+        }
+    }
+    for path in openapi_schema["paths"]:
+        for method in openapi_schema["paths"][path]:
+            openapi_schema["paths"][path][method]["security"] = [{"BearerAuth": []}]
+
+    app.openapi_schema = openapi_schema
+    return app.openapi_schema
+
+app.openapi = custom_openapi

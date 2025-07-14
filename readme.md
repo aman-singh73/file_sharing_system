@@ -12,8 +12,11 @@ A secure and role-based file sharing platform built using **FastAPI**, supportin
 ---
  📬 Postman Collection
 
-You can find the Postman collection [here](./EZ_assignment.postman_collection.json).  
-Import it into Postman to test all routes quickly.
+You can find the Postman collection below.  
+Import it into Postman to test all API routes quickly.
+
+- 📄 [View on GitHub](https://github.com/aman-singh73/file_sharing_system/blob/main/postman_Collection/EZ_assignment.postman_collection.json
+)
 
 ## 📁 Project Structure
 

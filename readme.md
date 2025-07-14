@@ -10,6 +10,10 @@ A secure and role-based file sharing platform built using **FastAPI**, supportin
 - SQLite with SQLAlchemy ORM
 
 ---
+ 📬 Postman Collection
+
+You can find the Postman collection [here](./EZ_assignment.postman_collection.json).  
+Import it into Postman to test all routes quickly.
 
 ## 📁 Project Structure
 

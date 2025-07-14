@@ -1,0 +1,18 @@
+👉 POSTMAN COLLECTION
+
+File: EZ_assignment.postman_collection.json
+
+This collection contains:
+- Signup + email verification
+- Login (Client + Ops)
+- Upload (Ops)
+- Download (Client)
+- Admin create Ops
+
+How to use:
+1. Open Postman
+2. Click Import
+3. Upload this JSON file
+4. Set your variables / headers
+
+Token format: Bearer <token>

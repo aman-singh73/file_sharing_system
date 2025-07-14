@@ -2,13 +2,11 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from fastapi.responses import FileResponse
 from .. import models, schemas, utils, auth
-import os
 
 router = APIRouter(prefix="/client", tags=["Client"])
 
 @router.post("/signup")
 def signup(user: schemas.UserCreate, db: Session = Depends(auth.get_db)):
-    # ✅ Check if email already exists
     existing_user = db.query(models.User).filter(models.User.email == user.email).first()
     if existing_user:
         raise HTTPException(status_code=400, detail="Email already registered")
@@ -26,17 +24,22 @@ def signup(user: schemas.UserCreate, db: Session = Depends(auth.get_db)):
     db.commit()
     db.refresh(new_user)
 
-    encrypted_url = f"http://localhost:8000/client/verify-email?token={token}"
-    return {"message": "Signup successful", "verify_link": encrypted_url}
+    utils.send_verification_email(user.email, token)
+
+    return {
+        "message": "Signup successful. A verification email has been sent to your inbox."
+    }
 
 @router.get("/verify-email")
 def verify_email(token: str, db: Session = Depends(auth.get_db)):
     user = db.query(models.User).filter(models.User.verification_token == token).first()
     if not user:
-        raise HTTPException(status_code=404, detail="Invalid token")
+        raise HTTPException(status_code=404, detail="Invalid or expired token")
+    
     user.is_verified = True
+    user.verification_token = None  # Clear token after use
     db.commit()
-    return {"message": "Email verified"}
+    return {"message": "✅ Email verified successfully. You can now log in."}
 
 @router.post("/login", response_model=schemas.Token)
 def login(user_cred: schemas.UserLogin, db: Session = Depends(auth.get_db)):
@@ -44,7 +47,8 @@ def login(user_cred: schemas.UserLogin, db: Session = Depends(auth.get_db)):
     if not user or not utils.verify_password(user_cred.password, user.password):
         raise HTTPException(status_code=400, detail="Invalid credentials")
     if not user.is_verified:
-        raise HTTPException(status_code=403, detail="Email not verified")
+        raise HTTPException(status_code=403, detail="Please verify your email before logging in")
+    
     token = utils.create_access_token({"sub": user.id})
     return {"access_token": token, "token_type": "bearer"}
 
